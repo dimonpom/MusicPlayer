@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void nextTrack(int trackID) {
         //mediaPlayer.stop();
-
+        tV_time.setText("00:00");
         mediaPlayer.reset();
         mediaPlayer = MediaPlayer.create(mainContext, tracks[trackID]);
         seekBar.setMax(mediaPlayer.getDuration());
@@ -100,7 +100,16 @@ public class MainActivity extends AppCompatActivity {
         seekBar.setProgress(milliseconds);
         int minutes = (milliseconds / 1000) / 60;
         int seconds = (milliseconds / 1000) % 60;
-        tV_time.setText(minutes+":"+seconds);
+        String min, sec;
+        if (minutes<10)
+            min = "0"+minutes;
+        else
+            min = String.valueOf(minutes);
+        if (seconds<10)
+            sec = "0"+seconds;
+        else
+            sec = String.valueOf(seconds);
+        tV_time.setText(min+":"+sec);
         //System.out.println(minutes + ":"+seconds);
         if (mediaPlayer.isPlaying()){
             Runnable runnable = new Runnable() {
